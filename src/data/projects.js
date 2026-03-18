@@ -50,7 +50,7 @@ export const projects = [
       'Context API state management'
     ],
     github: 'https://github.com/mpriyanshu22/Post-Box',
-    live: 'https://post-7f1x190s2-mpriyanshu22s-projects.vercel.app/#',
+    live: 'https://post-box-eta.vercel.app/',
     status: 'completed'
   }
 ];

@@ -5,8 +5,8 @@ import { HiArrowDown } from 'react-icons/hi2';
 const Hero = () => {
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/Priyanshu_Mishra (9).pdf';
-    link.download = 'Priyanshu_Mishra_Resume.pdf';
+    link.href = '/Priyanshu_resume.pdf';
+    link.download = 'Priyanshu_resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

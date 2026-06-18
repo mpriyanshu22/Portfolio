@@ -1,74 +1,107 @@
 import { motion } from 'framer-motion';
 import { achievements } from '../data/achievements';
-import { FaTrophy } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 
-const Achievements = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+const CATEGORY_STYLES = {
+  'Hackathon':   { color: '#f59e0b', bg: 'rgba(245,158,11,0.1)',  border: 'rgba(245,158,11,0.25)',  glow: 'rgba(245,158,11,0.2)' },
+  'Competition': { color: '#ec4899', bg: 'rgba(236,72,153,0.1)',  border: 'rgba(236,72,153,0.25)', glow: 'rgba(236,72,153,0.2)' },
+  'Leadership':  { color: '#38bdf8', bg: 'rgba(56,189,248,0.1)',  border: 'rgba(56,189,248,0.25)', glow: 'rgba(56,189,248,0.2)' },
+  'Coding':      { color: '#6366f1', bg: 'rgba(99,102,241,0.1)',  border: 'rgba(99,102,241,0.25)', glow: 'rgba(99,102,241,0.2)' },
+};
 
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.4,
-      },
-    },
-  };
+const AchievementCard = ({ achievement, index }) => {
+  const style = CATEGORY_STYLES[achievement.category] || CATEGORY_STYLES['Coding'];
 
   return (
-    <section id="achievements" className="section-padding bg-white dark:bg-gray-900">
-      <div className="container-custom">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Achievements
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
-          </motion.div>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.85, y: 30 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
+      whileHover={{ scale: 1.04, y: -8 }}
+      className="achievement-card group relative"
+    >
+      {/* Animated gradient border top */}
+      <div className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl overflow-hidden">
+        <div className="h-full w-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{ background: `linear-gradient(90deg, transparent, ${style.color}, transparent)` }} />
+      </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {achievements.map((achievement) => (
-              <motion.div
-                key={achievement.id}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border-l-4 border-blue-600 dark:border-blue-400"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="text-4xl">{achievement.icon}</div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <FaTrophy className="text-yellow-500" size={16} />
-                      <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
-                        {achievement.category}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                      {achievement.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      {achievement.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+      {/* Background glow */}
+      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: `radial-gradient(circle at top left, ${style.glow}, transparent 70%)` }} />
+
+      {/* Icon + category */}
+      <div className="flex items-start gap-4 relative z-10">
+        {/* Emoji icon */}
+        <div className="text-4xl flex-shrink-0 w-14 h-14 flex items-center justify-center rounded-xl"
+          style={{ background: style.bg, border: `1px solid ${style.border}` }}>
+          {achievement.icon}
+        </div>
+
+        <div className="flex-1 min-w-0">
+          {/* Category badge */}
+          <div className="flex items-center gap-2 mb-2">
+            <FaStar size={10} style={{ color: style.color }} />
+            <span className="text-xs font-semibold tracking-wider uppercase"
+              style={{ color: style.color }}>
+              {achievement.category}
+            </span>
           </div>
+
+          {/* Title */}
+          <h3 className="font-bold text-white mb-1.5 font-display leading-snug">
+            {achievement.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-sm leading-relaxed" style={{ color: '#64748b' }}>
+            {achievement.description}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const Achievements = () => {
+  return (
+    <section id="achievements" className="section-padding" style={{ background: '#020610' }}>
+      <div className="container-custom">
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-widest uppercase mb-4"
+            style={{ background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.25)', color: '#fbbf24' }}>
+            🏆 Milestones
+          </span>
+          <h2 className="section-heading gradient-text">Achievements</h2>
+          <div className="section-divider" />
+          <p className="mt-4 max-w-xl mx-auto text-sm" style={{ color: '#64748b' }}>
+            Recognitions, rankings, and milestones from my academic and coding journey.
+          </p>
         </motion.div>
+
+        {/* Cards grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {achievements.map((achievement, index) => (
+            <AchievementCard key={achievement.id} achievement={achievement} index={index} />
+          ))}
+        </div>
+
+        {/* Decorative bottom bar */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="mt-14 glow-line"
+        />
       </div>
     </section>
   );

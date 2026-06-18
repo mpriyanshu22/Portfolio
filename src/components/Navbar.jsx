@@ -1,30 +1,40 @@
 import { useState, useEffect } from 'react';
-import { FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa';
-import { useTheme } from '../context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaBars, FaTimes } from 'react-icons/fa';
+
+const NAV_ITEMS = [
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Achievements', href: '#achievements' },
+  { name: 'Contact', href: '#contact' },
+];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { isDark, toggleTheme } = useTheme();
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 30);
+
+      // Detect active section
+      const sections = NAV_ITEMS.map((item) => item.href.replace('#', ''));
+      let current = 'home';
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 100) {
+          current = id;
+        }
+      }
+      setActiveSection(current);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Achievements', href: '#achievements' },
-    { name: 'Contact', href: '#contact' },
-  ];
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
@@ -37,74 +47,110 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      }`}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      style={{
+        background: isScrolled
+          ? 'rgba(5, 8, 22, 0.85)'
+          : 'transparent',
+        backdropFilter: isScrolled ? 'blur(20px)' : 'none',
+        borderBottom: isScrolled ? '1px solid rgba(99,102,241,0.15)' : 'none',
+        boxShadow: isScrolled ? '0 4px 30px rgba(0,0,0,0.5)' : 'none',
+      }}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
           <motion.a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
           >
-            PM
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center font-bold text-white text-sm font-display"
+              style={{
+                background: 'linear-gradient(135deg, #6366f1, #a855f7)',
+                boxShadow: '0 0 15px rgba(99,102,241,0.4)',
+              }}>
+              PM
+            </div>
+            <span className="hidden sm:block font-semibold text-white text-sm">Priyanshu</span>
           </motion.a>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium relative group"
-              >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-              </a>
-            ))}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {isDark ? (
-                <FaSun className="text-yellow-500" size={20} />
-              ) : (
-                <FaMoon className="text-gray-700" size={20} />
-              )}
-            </button>
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeSection === item.href.replace('#', '');
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 nav-link"
+                  style={{
+                    color: isActive ? '#a5b4fc' : '#94a3b8',
+                    background: isActive ? 'rgba(99,102,241,0.1)' : 'transparent',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = '#c7d2fe';
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.color = '#94a3b8';
+                      e.currentTarget.style.background = 'transparent';
+                    }
+                  }}
+                >
+                  {item.name}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full"
+                      style={{ background: 'linear-gradient(90deg, #6366f1, #a855f7)' }}
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </a>
+              );
+            })}
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-4">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
-              aria-label="Toggle theme"
+          {/* Right side */}
+          <div className="flex items-center gap-3">
+            {/* Hire Me badge */}
+            <motion.a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, '#contact')}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white"
+              style={{
+                background: 'linear-gradient(135deg, #6366f1, #a855f7)',
+                boxShadow: '0 0 15px rgba(99,102,241,0.3)',
+              }}
             >
-              {isDark ? (
-                <FaSun className="text-yellow-500" size={18} />
-              ) : (
-                <FaMoon className="text-gray-700" size={18} />
-              )}
-            </button>
+              Hire Me
+            </motion.a>
+
+
+
+            {/* Mobile hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700"
+              className="md:hidden p-2.5 rounded-xl"
+              style={{
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                color: '#94a3b8',
+              }}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? (
-                <FaTimes size={20} />
-              ) : (
-                <FaBars size={20} />
-              )}
+              {isMobileMenuOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
             </button>
           </div>
         </div>
@@ -117,19 +163,43 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800"
+            transition={{ duration: 0.3 }}
+            className="md:hidden overflow-hidden"
+            style={{
+              background: 'rgba(5,8,22,0.95)',
+              borderTop: '1px solid rgba(99,102,241,0.15)',
+              backdropFilter: 'blur(20px)',
+            }}
           >
-            <div className="container-custom py-4 space-y-3">
-              {navItems.map((item) => (
-                <a
+            <div className="container-custom py-4 space-y-1">
+              {NAV_ITEMS.map((item, i) => (
+                <motion.a
                   key={item.name}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200"
+                  style={{
+                    color: activeSection === item.href.replace('#', '') ? '#a5b4fc' : '#94a3b8',
+                    background: activeSection === item.href.replace('#', '') ? 'rgba(99,102,241,0.1)' : 'transparent',
+                  }}
                 >
                   {item.name}
-                </a>
+                </motion.a>
               ))}
+              <motion.a
+                href="#contact"
+                onClick={(e) => handleNavClick(e, '#contact')}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="block text-center py-3 rounded-xl font-semibold text-white mt-3"
+                style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}
+              >
+                Hire Me
+              </motion.a>
             </div>
           </motion.div>
         )}

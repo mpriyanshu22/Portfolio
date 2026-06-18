@@ -1,8 +1,8 @@
-import { 
-  FaCode, 
-  FaReact, 
-  FaNode, 
-  FaDatabase, 
+import {
+  FaCode,
+  FaReact,
+  FaNode,
+  FaDatabase,
   FaTools,
   FaJava,
   FaPython,
@@ -16,13 +16,13 @@ import {
   FaShieldAlt,
   FaTerminal
 } from 'react-icons/fa';
-import { 
-  SiTypescript, 
-  SiMongodb, 
-  SiExpress, 
-  SiPostgresql, 
-  SiRedux, 
-  SiTailwindcss, 
+import {
+  SiTypescript,
+  SiMongodb,
+  SiExpress,
+  SiPostgresql,
+  SiRedux,
+  SiTailwindcss,
   SiBootstrap,
   SiMui,
   SiRedis,
@@ -92,13 +92,13 @@ export const skills = [
     icon: FaTools,
     items: [
       { name: 'Docker', icon: FaDocker }, // [cite: 49]
-      { name: 'Judge0', icon: FaTerminal }, // [cite: 49]
+      { name: 'Shell Scripting', icon: FaTerminal }, // [cite: 49]
       { name: 'Git', icon: FaGitAlt }, // [cite: 49]
       { name: 'GitHub', icon: SiGithub }, // [cite: 49]
       { name: 'Postman', icon: SiPostman }, // [cite: 49]
-      { name: 'Vercel', icon: SiVercel }, // [cite: 49]
-      { name: 'Render', icon: SiRender }, // [cite: 49]
-      { name: 'Linux Basics', icon: FaLinux } // [cite: 49]
+      { name: 'GitLab', icon: SiVercel }, // [cite: 49]
+      { name: 'AWS', icon: SiRender }, // [cite: 49]
+      { name: 'Linux', icon: FaLinux } // [cite: 49]
     ]
   },
   {

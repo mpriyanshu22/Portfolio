@@ -1,6 +1,22 @@
 export const experiences = [
   {
     id: 1,
+    title: 'Full Stack Developer Intern',
+    company: 'Unified Mentor Pvt. Ltd.',
+    period: 'March 2026 – May 2026',
+    type: 'Remote Internship',
+    certificate: 'https://drive.google.com/file/d/1b5JEGX27UiEW3hxM_8IxMh-sr2bUP4Wp/view?usp=drivesdk',
+    achievements: [
+      'Built Two Projects During Internship named as Hometown Hub and RelocateMe.',
+      'Worked on Frontend using React.js and Tailwind CSS.',
+      'Worked on Backend using Node.js and Express.js.',
+      'Worked on Database using MongoDB and Applied Redis to cache the credentials and enhance user experience.',
+      'Worked on DevOps and Cloud Computing using Git, Docker, AWS.'
+    ],
+    tech: ['React', 'Node.js', 'MongoDB', 'Express.js', 'REST APIs', 'Redis', 'Git', 'Docker', 'AWS', 'Tailwind CSS']
+  },
+  {
+    id: 2,
     title: 'Software Developer Intern',
     company: 'Winkget Express Pvt. Ltd.',
     location: 'Hybrid',
@@ -17,7 +33,7 @@ export const experiences = [
     tech: ['React', 'Node.js', 'MongoDB', 'Express.js', 'REST APIs']
   },
   {
-    id: 2,
+    id: 3,
     title: 'Cyber Security Intern',
     company: 'C-DAC Noida',
     location: 'Virtual',

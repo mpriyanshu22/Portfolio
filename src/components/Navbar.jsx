@@ -40,8 +40,16 @@ const Navbar = () => {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setIsMobileMenuOpen(false);
+      // Close mobile menu first, then scroll after a short delay
+      // so the AnimatePresence exit animation doesn't interfere with scrollIntoView
+      if (isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 350);
+      } else {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 

@@ -4,7 +4,7 @@ import { FaGraduationCap, FaCode, FaTrophy, FaBolt } from 'react-icons/fa';
 const STATS = [
   {
     icon: FaCode,
-    value: '400+',
+    value: '500+',
     label: 'DSA Problems Solved',
     color: '#6366f1',
     shadow: 'rgba(99,102,241,0.3)',
@@ -13,7 +13,7 @@ const STATS = [
   },
   {
     icon: FaTrophy,
-    value: '1540',
+    value: '1600+',
     label: 'CodeChef Peak Rating',
     color: '#f59e0b',
     shadow: 'rgba(245,158,11,0.3)',
@@ -22,7 +22,7 @@ const STATS = [
   },
   {
     icon: FaTrophy,
-    value: '1550+',
+    value: '1600+',
     label: 'LeetCode Peak Rating',
     color: '#a855f7',
     shadow: 'rgba(168,85,247,0.3)',
@@ -115,10 +115,10 @@ const About = () => {
                 </>,
                 <>
                   I have solved{' '}
-                  <span className="font-semibold" style={{ color: '#c084fc' }}>400+ DSA problems</span>
+                  <span className="font-semibold" style={{ color: '#c084fc' }}>500+ DSA problems</span>
                   {' '}across platforms like LeetCode, CodeChef, Codeforces, and GFG. My competitive programming journey includes achieving a peak rating of{' '}
-                  <span className="font-semibold text-white">1540 on CodeChef</span> and{' '}
-                  <span className="font-semibold text-white">1550+ on LeetCode</span>.
+                  <span className="font-semibold text-white">1600+ on CodeChef</span> and{' '}
+                  <span className="font-semibold text-white">1600+ on LeetCode</span>.
                 </>,
                 <>
                   I have completed a{' '}

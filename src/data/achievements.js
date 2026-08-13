@@ -30,14 +30,14 @@ export const achievements = [
   {
     id: 5,
     title: 'Competitive Programming',
-    description: 'CodeChef: 1540 | LeetCode: 1550+',
+    description: 'CodeChef: 1600+ | LeetCode: 1600+',
     category: 'Coding',
     icon: '💻'
   },
   {
     id: 6,
     title: 'DSA Problem Solver',
-    description: 'Solved 400+ problems across multiple platforms',
+    description: 'Solved 500+ problems across multiple platforms',
     category: 'Coding',
     icon: '📊'
   }

@@ -161,7 +161,7 @@ const Skills = () => {
           </AnimatePresence>
 
           {/* All-at-once overview grid */}
-          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {skills.map((cat, i) => {
               const catColors = CATEGORY_COLORS[cat.category] || CATEGORY_COLORS['Languages'];
               const CatIcon = cat.icon;
@@ -211,7 +211,8 @@ const Skills = () => {
                 </motion.div>
               );
             })}
-          </div>
+          </div> */}
+          
         </motion.div>
       </div>
     </section>

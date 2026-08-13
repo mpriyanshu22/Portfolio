@@ -249,9 +249,9 @@ const Hero = () => {
             className="flex flex-wrap justify-center gap-6 mb-10"
           >
             {[
-              { label: 'DSA Problems', value: '400+', color: '#6366f1' },
-              { label: 'CodeChef Rating', value: '1540', color: '#a855f7' },
-              { label: 'LeetCode Rating', value: '1550+', color: '#ec4899' },
+              { label: 'DSA Problems', value: '500+', color: '#6366f1' },
+              { label: 'CodeChef Rating', value: '1600', color: '#a855f7' },
+              { label: 'LeetCode Rating', value: '1600+', color: '#ec4899' },
               { label: 'Internships', value: '3', color: '#38bdf8' },
             ].map((stat, i) => (
               <motion.div

@@ -39,7 +39,7 @@ function App() {
     <>
       <Helmet>
         <title>Priyanshu Mishra — Software Developer & MERN Stack Engineer</title>
-        <meta name="description" content="Priyanshu Mishra — Software Developer | React & MERN Stack Enthusiast. Final-year B.Tech IT student with 400+ DSA problems solved and expertise in full-stack web development." />
+        <meta name="description" content="Priyanshu Mishra — Software Developer | React & MERN Stack Enthusiast. Final-year B.Tech IT student with 500+ DSA problems solved and expertise in full-stack web development." />
         <meta name="keywords" content="Priyanshu Mishra, Software Developer, React Developer, MERN Stack, Full Stack Developer, Web Developer, Portfolio, Competitive Programming" />
         <meta name="author" content="Priyanshu Mishra" />
         <meta property="og:title" content="Priyanshu Mishra — Software Developer Portfolio" />

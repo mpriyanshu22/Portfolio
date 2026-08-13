@@ -5,7 +5,6 @@ import { HiArrowDown } from 'react-icons/hi2';
 
 const ROLES = [
   'Software Engineer',
-  'Full-Stack Developer',
   'Competitive Programmer',
   'MERN Stack Developer',
   'Problem Solver',
@@ -115,8 +114,8 @@ const Hero = () => {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = 'Priyanshu_updated_resume.pdf';
-    link.download = 'Priyanshu_updated_resume.pdf';
+    link.href = 'priyanshu_resume_2026';
+    link.download = 'priyanshu_resume_2026';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

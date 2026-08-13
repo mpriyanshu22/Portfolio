@@ -114,8 +114,8 @@ const Hero = () => {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = 'priyanshu_resume_2026';
-    link.download = 'priyanshu_resume_2026';
+    link.href = 'priyanshu_resume_2026.pdf';
+    link.download = 'priyanshu_resume_2026.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
